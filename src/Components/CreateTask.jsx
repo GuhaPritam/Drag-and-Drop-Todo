@@ -3,7 +3,6 @@ import { useState } from 'react';
 import toast from "react-hot-toast";
 import { v4 as uuidv4 } from 'uuid';
 
-
 const CreateTask = ({ tasks, setTasks }) => {
     const [createTask, setCreateTask] = useState({ id: '', name: '', status: 'todo' });
     console.log(tasks)
@@ -13,12 +12,18 @@ const CreateTask = ({ tasks, setTasks }) => {
         // Adding one alert
         if (createTask.name.length < 3)
             return toast.error("A task must have more than 3 characters");
+
+        if (createTask.name.length > 100)
+            return toast.error("A task must not be more than 100 characters");
+
         setTasks((prev) => {
             // Added preview array and createTask data in []
             const convertList = [...prev, createTask];
             localStorage.setItem("tasks", JSON.stringify(convertList));
             return convertList;
         });
+        toast.success("Task Created");
+        createTask({ id: '', name: '', status: 'todo' })
     };
 
     return (

@@ -6,8 +6,6 @@ import ListTask from "./Components/ListTask";
 const App = () => {
   const [tasks, setTasks] = useState([]);
 
-  // console.log(tasks)
-
   useEffect(() => {
     // Take all the data as {} from local storage
     setTasks(JSON.parse(localStorage.getItem("tasks")))
