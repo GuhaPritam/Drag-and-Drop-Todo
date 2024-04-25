@@ -1,7 +1,28 @@
-export default function App() {
+import { useEffect, useState } from 'react';
+import { Toaster } from "react-hot-toast";
+import CreateTask from "./Components/CreateTask";
+import ListTask from "./Components/ListTask";
+
+const App = () => {
+  const [tasks, setTasks] = useState([]);
+
+  // console.log(tasks)
+
+  useEffect(() => {
+    // Take all the data as {} from local storage
+    setTasks(JSON.parse(localStorage.getItem("tasks")))
+  }, []);
+
   return (
     <>
-      <div className='bg-black'>Hellow</div>
+      <Toaster />
+      <div className='bg-slate-100 w-screen h-screen flex flex-col items-center pt-32 gap-16'>
+        {/* Sending useState data by props */}
+        <CreateTask tasks={tasks} setTasks={setTasks} />
+        <ListTask tasks={tasks} setTasks={setTasks} />
+      </div>
     </>
-  );
+  )
 }
+
+export default App
