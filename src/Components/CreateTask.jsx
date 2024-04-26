@@ -15,7 +15,7 @@ const CreateTask = ({ tasks, setTasks }) => {
 
         if (createTask.name.length > 100)
             return toast.error("A task must not be more than 100 characters");
-
+        // Set all the final data to tasks
         setTasks((prev) => {
             // Added preview array and createTask data in []
             const convertList = [...prev, createTask];
