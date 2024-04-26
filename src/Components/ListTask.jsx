@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import Section from './Section';
 
 const ListTask = ({ tasks, setTasks }) => {
     // Define state variables for different task statuses
@@ -39,27 +40,9 @@ ListTask.propTypes = {
 
 export default ListTask
 
-const Section = ({ status, tasks, setTasks, todos, inProgress, closed }) => {
-    let text = 'Todo';
-    let bg = 'bg-slate-500';
 
-    return (
-        <>
-            <div className={`w-64`}>
-                <Header text={text} bg={bg} count={todos.length} /> List
-            </div>
-        </>
-    );
-};
 
-const Header = ({ text, bg, count }) => {
-    return (
-        <>
-            <div className={`${bg} flex items-center h-12 pl-4 rounded-md uppercase text-sm text-white`}>
-                {text}{" "} 
-                <div className='ml-2 bg-white w-5 text-black rounded-full flex items-center justify-center'>{count}</div>
-            </div> 
-        </>
-    );
-};
+
+
+
 
