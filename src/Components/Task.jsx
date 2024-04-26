@@ -1,7 +1,16 @@
 import PropTypes from 'prop-types';
 import toast from "react-hot-toast";
+import { useDrag } from 'react-dnd';
 
 const Task = ({ task, tasks, setTasks }) => {
+    const [{ isDragging }, drag] = useDrag(() => ({
+        type: 'task',
+        item: {id: task.id},
+        collect: (monitor) => ({
+          isDragging: !!monitor.isDragging()
+        })
+      }))
+
     const handelRemove = (id) => {
         const fTasks = tasks.filter((t) => t.id !== id);
         localStorage.setItem('tasks', JSON.stringify(fTasks));
@@ -11,7 +20,7 @@ const Task = ({ task, tasks, setTasks }) => {
 
     return (
         <>
-            <div className={`relative p-4 mt-8 shadow-md cursor-grab`}>
+            <div ref={drag} className={`relative p-4 mt-8 shadow-md cursor-grab ${isDragging ? 'opacity-25' : 'opacity-100'}`}>
                 <p>{task.name}</p>
                 <button className='absolute bottom-1 right-1 text-slate-400' onClick={() => handelRemove(task.id)}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
