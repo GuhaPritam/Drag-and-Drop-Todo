@@ -10,13 +10,13 @@ const ListTask = ({ tasks, setTasks }) => {
 
     // Filter tasks based on status and update state variables
     useEffect(() => {
-        const fTodos = tasks.filter((task) => task.status === 'todo');
-        const fInProgress = tasks.filter((task) => task.status === 'inprogress');
-        const fClosed = tasks.filter((task) => task.status === 'closed');
+        const fTodos = tasks?.filter((task) => task?.status === 'todo');
+        const fInProgress = tasks?.filter((task) => task?.status === 'inprogress');
+        const fClosed = tasks?.filter((task) => task?.status === 'closed');
 
-        setTodos(fTodos);
-        setInProgress(fInProgress);
-        setClosed(fClosed);
+        setTodos(fTodos || []);
+        setInProgress(fInProgress || []);
+        setClosed(fClosed || []);
     }, [tasks])
 
     // Array of task statuses
